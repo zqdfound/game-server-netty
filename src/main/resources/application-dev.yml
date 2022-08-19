@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+
+spring:
+#redis
+  redis:
+    database: 10
+    host: localhost
+    password: 12345
+    port: 6379
+

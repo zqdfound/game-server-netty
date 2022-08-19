@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>socket测试</title><script>
+    var socket;
+    //判断当前浏览器是否支持websocket
+    if (window.WebSocket) {
+        //go on
+        socket = new WebSocket("ws://localhost:3032/netty");
+        //相当于channelReado, ev 收到服务器端回送的消息
+        socket.onmessage = function (ev) {
+            var rt = document.getElementById("responseText");
+            rt.value = rt.value + "\n" + ev.data;
+            alert(ev.data);
+        }
+
+        //相当于连接开启(感知到连接开启)
+        socket.onopen = function (ev) {
+            var rt = document.getElementById("responseText");
+            rt.value = "连接开启了.."
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'ADD_USER'};
+            var myJSON = JSON.stringify(myObj);
+            socket.send(myJSON)
+        }
+
+        //相当于连接关闭(感知到连接关闭)
+        socket.onclose = function (ev) {
+            var rt = document.getElementById("responseText");
+            rt.value = rt.value + "\n" + "连接关闭了.."
+        }
+    } else {
+        alert("当前浏览器不支持websocket")
+    }
+
+    function errorTest() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'WOAINI'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+
+    function heartBeat() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'HEART_BEAT'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+    function match() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'MATCH_USER'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+    function cancelmatch() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'CANCEL_MATCH'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+    function play() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'PLAY_GAME'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+    function gameover() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var myObj = {userId: userId,msgType:'GAME_OVER'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+
+    function createRoom() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var roomNo = document.getElementById("roomNo").value;
+            var myObj = {userId: userId,roomNo: roomNo,msgType:'CREATE_ROOM'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+
+    function joinRoom() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var roomNo = document.getElementById("roomNo").value;
+            var myObj = {userId: userId,roomNo: roomNo,msgType:'JOIN_ROOM'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+    function quitRoom() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var roomNo = document.getElementById("roomNo").value;
+            var myObj = {userId: userId,roomNo: roomNo,msgType:'QUIT_ROOM'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+
+    function kickOut() {
+        if (!window.socket) { //先判断socket是否创建好
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            //通过socket 发送消息
+            var userId = document.getElementById("userId").value;
+            var roomNo = document.getElementById("roomNo").value;
+            var myObj = {userId: userId,roomNo: roomNo,msgType:'KICK_OUT'};
+            var messageJson = JSON.stringify(myObj);
+            socket.send(messageJson)
+        } else {
+            alert("连接没有开启");
+        }
+    }
+
+</script>
+</head>
+<body>
+<h1 th:text="${userId}"></h1>
+<input type="hidden" th:value="${userId}" id="userId">
+<form onsubmit="return false">
+<!--    <textarea name="message" style="height: 300px; width: 300px"></textarea>-->
+<!--    <input type="button" value="发送" onclick="send(this.form.message.value)">-->
+    <input type="button" value="错误消息类型测试" onclick="errorTest()">
+    <input type="button" value="心跳检测" onclick="heartBeat()">
+    <input type="button" value="匹配" onclick="match()">
+    <input type="button" value="取消匹配" onclick="cancelmatch()">
+<!--    <input type="button" value="进入对局" onclick="play()">-->
+    <input type="button" value="结束对战" onclick="gameover()">
+    <textarea id="responseText" style="height: 300px; width: 300px"></textarea>
+    <input type="button" value="创建房间" onclick="createRoom()">
+    <input type="button" value="加入房间" onclick="joinRoom()">
+    <input type="button" value="退出房间" onclick="quitRoom()">
+    <input type="button" value="房主踢人" onclick="kickOut()">
+    <input id="roomNo" type="text" placeholder="输入房间号">
+<!--    <input type="button" value="清空内容" onclick="document.getElementById('responseText').value=''">-->
+</form>
+</body>
+</html>
