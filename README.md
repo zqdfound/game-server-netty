@@ -1,4 +1,4 @@
-# netty+websocket+redis实现游戏服务器
+# netty+websocket+redis实现简单游戏匹配
 
 主要模式包含：
 1. 自定义房间
